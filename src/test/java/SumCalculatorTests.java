@@ -26,8 +26,8 @@ class SumCalculatorTests {
         Assertions.assertEquals(actual, expected);
     }
 
-        @Test
+    @Test
     void testExpectedException() {
-       Assertions.assertThrows(IllegalArgumentException.class, () -> calculator.sum(0));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> calculator.sum(0));
     }
 }
