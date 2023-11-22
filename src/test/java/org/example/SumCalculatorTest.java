@@ -1,9 +1,11 @@
+package org.example;
+
 import org.example.SumCalculator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class SumCalculatorTests {
+class SumCalculatorTest {
 
     private SumCalculator calculator;
 
