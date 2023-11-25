@@ -4,6 +4,8 @@ import org.example.SumCalculator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class SumCalculatorTest {
 
@@ -20,7 +22,6 @@ class SumCalculatorTest {
         int expected = 1;
         Assertions.assertEquals(actual, expected);
     }
-
     @Test
     void calculatorSumNumber3Test() {
         int actual = calculator.sum(3);
