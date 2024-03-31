@@ -21,15 +21,29 @@ checkstyle {
     ignoreFailures = false // Зупиняти збірку в разі виявлення помилок Checkstyle
     showViolations = true
 }
-tasks.named('checkstyleMain').configure{
-    dependsOn('assemble')
-    description('Runs Checkstyle on the main source set')
-    group('verification')
+
+// Додати нове завдання для лінтування всього проекту
+task lint(type: Checkstyle) {
+    description 'Runs Checkstyle for the entire project'
+    group 'verification'
+    dependsOn 'check'
 }
-tasks.named('checkstyleTest').configure{
-    dependsOn('testClasses')
-    description('Runs Checkstyle on the test source set')
-    group('verification')
+
+// Забезпечити виконання завдання лінтування перед збіркою
+tasks.named('assemble').configure {
+    dependsOn 'lint'
+}
+
+// Налаштувати завдання для лінтування тестового коду
+task lintTest(type: Checkstyle) {
+    description 'Runs Checkstyle for test sources'
+    group 'verification'
+    dependsOn 'checkstyleTest'
+}
+
+// Забезпечити виконання завдання лінтування тестового коду перед тестуванням
+tasks.named('test').configure {
+    dependsOn 'lintTest'
 }
 
 test {
