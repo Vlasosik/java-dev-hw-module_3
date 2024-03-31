@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'checkstyle'
 }
 
 group = 'org.example'
@@ -12,6 +13,23 @@ repositories {
 dependencies {
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+checkstyle {
+    toolVersion = "8.44" // Версія Checkstyle
+    configFile = file("$rootDir/config/checkstyle/checkstyle.xml") // Шлях до файлу конфігурації Checkstyle
+    ignoreFailures = false // Зупиняти збірку в разі виявлення помилок Checkstyle
+    showViolations = true
+}
+tasks.named('checkstyleMain').configure{
+    dependsOn('assemble')
+    description('Runs Checkstyle on the main source set')
+    group('verification')
+}
+tasks.named('checkstyleTest').configure{
+    dependsOn('testClasses')
+    description('Runs Checkstyle on the test source set')
+    group('verification')
 }
 
 test {
